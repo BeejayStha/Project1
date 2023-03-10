@@ -162,7 +162,7 @@ func SJFPrioritySchedule(w io.Writer, title string, processes []Process) {
 			fmt.Sprint(currentProcess.ArrivalTime),
 			fmt.Sprint(serviceStart - (currentProcess.ArrivalTime)),
 			fmt.Sprint(math.Round(float64(serviceStart)-float64(currentProcess.ArrivalTime)) + float64(currentProcess.BurstDuration)),
-			fmt.Sprint((serviceStart) - (currentProcess.ArrivalTime) + currentProcess.BurstDuration + currentProcess.ArrivalTime),
+			fmt.Sprint( (serviceStart)-(currentProcess.ArrivalTime) + currentProcess.BurstDuration + currentProcess.ArrivalTime),
 		}
 
 		gantt = append(gantt, TimeSlice{
@@ -181,7 +181,7 @@ func SJFPrioritySchedule(w io.Writer, title string, processes []Process) {
 
 	count := float64(len(processes))
 	aveWait := float64(totalWait) / count
-	aveTurnaround := float64(totalWait+serviceTime) / count
+	aveTurnaround := float64(totalWait + serviceTime) / count
 	aveThroughput := count / float64(serviceTime)
 
 	outputTitle(w, title)
@@ -238,7 +238,7 @@ func addToWaitingQueue(waiting *PriorityQueue, arrived *[]Process, serviceTime i
 }
 
 //
-// func SJFSchedule(w io.Writer, title string, processes []Process) {
+// func SJFSchedule(w io.Writer, title string, processes []Process) { 
 
 // }
 func SJFSchedule(w io.Writer, title string, processes []Process) {
@@ -288,7 +288,7 @@ func SJFSchedule(w io.Writer, title string, processes []Process) {
 			schedule[nextProcess.ProcessID-1] = []string{
 				fmt.Sprint(nextProcess.ProcessID),
 				fmt.Sprint(nextProcess.Priority),
-				fmt.Sprint(nextProcess.BurstDuration + 1),
+				fmt.Sprint(nextProcess.BurstDuration+1),
 				fmt.Sprint(nextProcess.ArrivalTime),
 				fmt.Sprint(serviceStart - nextProcess.ArrivalTime),
 				fmt.Sprint(serviceTime - nextProcess.ArrivalTime),
@@ -302,7 +302,7 @@ func SJFSchedule(w io.Writer, title string, processes []Process) {
 
 		// Add any new arrived processes to the waiting queue
 		addToWaitingQueue(&waiting, &arrived, serviceTime)
-
+		
 		gantt = append(gantt, TimeSlice{
 			PID:   nextProcess.ProcessID,
 			Start: serviceStart,
@@ -312,7 +312,7 @@ func SJFSchedule(w io.Writer, title string, processes []Process) {
 
 	count := float64(len(processes))
 	aveWait := float64(totalWait) / count
-	aveTurnaround := float64(totalWait+serviceTime) / count
+	aveTurnaround := float64(totalWait + serviceTime) / count
 	// aveTurnaround := aveWait + float64(schedule[len(schedule)-1][6])
 	aveThroughput := count / float64(serviceTime)
 
@@ -321,6 +321,7 @@ func SJFSchedule(w io.Writer, title string, processes []Process) {
 	outputSchedule(w, schedule, aveWait, aveTurnaround, aveThroughput)
 }
 
+//
 func RRSchedule(w io.Writer, title string, processes []Process, quantum int64) {
 	var (
 		serviceTime     int64
@@ -356,7 +357,7 @@ func RRSchedule(w io.Writer, title string, processes []Process, quantum int64) {
 			schedule = append(schedule, []string{
 				fmt.Sprint(p.ProcessID),
 				fmt.Sprint(p.Priority),
-				fmt.Sprint(p.BurstDuration + duration),
+				fmt.Sprint(p.BurstDuration+duration),
 				fmt.Sprint(p.ArrivalTime),
 				fmt.Sprint(waitingTime),
 				fmt.Sprint(turnaround),
@@ -380,6 +381,7 @@ func RRSchedule(w io.Writer, title string, processes []Process, quantum int64) {
 	outputGantt(w, gantt)
 	outputSchedule(w, schedule, aveWait, aveTurnaround, aveThroughput)
 }
+
 
 //endregion
 
