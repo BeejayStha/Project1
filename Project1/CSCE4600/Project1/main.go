@@ -30,12 +30,12 @@ func main() {
 	}
 
 	// First-come, first-serve scheduling
-	// FCFSSchedule(os.Stdout, "First-come, first-serve", processes)
-
+	FCFSSchedule(os.Stdout, "First-come, first-serve", processes)
+	//Shortest-job-first
 	SJFSchedule(os.Stdout, "Shortest-job-first", processes)
-	//
+	//SJFPrioritySchedule
 	SJFPrioritySchedule(os.Stdout, "SJFPrioritySchedule", processes)
-	//
+	//Round-robin
 	RRSchedule(os.Stdout, "Round-robin", processes, 2)
 }
 
