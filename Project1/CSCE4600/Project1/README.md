@@ -14,7 +14,26 @@ For this project we'll be building a simple process scheduler that takes in a fi
 In order to compile I used Visual Studio Code. Then run command 
 - go run main.go example_processes.csv
 
-#### Sample Output
+Sample Output
+
+----------------------------------------------
+            First-come, First-serve
+----------------------------------------------
+Gantt schedule
+|   1   |   2   |   3   |
+0	5	14	20
+
+Schedule table
++----+----------+-------+---------+---------+------------+------------+
+| ID | PRIORITY | BURST | ARRIVAL |  WAIT   | TURNAROUND |    EXIT    |
++----+----------+-------+---------+---------+------------+------------+
+|  1 |        2 |     5 |       0 |       0 |          5 |          5 |
+|  2 |        1 |     9 |       3 |       2 |         11 |         14 |
+|  3 |        3 |     6 |       6 |       8 |         14 |         20 |
++----+----------+-------+---------+---------+------------+------------+
+|                                   AVERAGE |  AVERAGE   | THROUGHPUT |
+|                                    3.33   |   10.00    |   0.15/T   |
++----+----------+-------+---------+---------+------------+------------+
 ----------------------------------------------
             First-come, first-serve
 ----------------------------------------------
